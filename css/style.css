@@ -6,14 +6,14 @@
 }
 
 body {
-    background-color: #13082b; /* Dark Purple Background Kitakuji */
+    background-color: #13082b; 
     color: #f1f5f9;
     padding-bottom: 50px;
 }
 
-/* Navigation Bar */
+
 .navbar {
-    background-color: #1c0e3d; /* Dark Violet Header */
+    background-color: #1c0e3d; 
     color: #fff;
     padding: 14px 24px;
     display: flex;
@@ -29,7 +29,7 @@ body {
 .nav-brand {
     font-size: 20px;
     font-weight: bold;
-    color: #e879f9; /* Magenta Accent */
+    color: #e879f9; 
     text-shadow: 0 0 10px rgba(232, 121, 249, 0.4);
 }
 
@@ -74,7 +74,7 @@ body {
 }
 
 .badge {
-    background-color: #d946ef; /* Bright Neon Magenta */
+    background-color: #d946ef; 
     color: #fff;
     border-radius: 50%;
     padding: 2px 7px;
@@ -144,7 +144,7 @@ select {
     color: #c084fc;
 }
 
-/* Product Card Grid */
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -174,7 +174,7 @@ select {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #d946ef;
+    background-color: #fa0101;
     color: #fff;
     font-size: 12px;
     font-weight: bold;
@@ -236,7 +236,7 @@ select {
 .btn-add-cart {
     width: 100%;
     padding: 10px;
-    background: linear-gradient(135deg, #a855f7, #d946ef); /* Purple Magenta Gradient */
+    background: linear-gradient(135deg, #a855f7, #d946ef); 
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -389,7 +389,31 @@ select {
     to { transform: rotate(360deg); }
 }
 
-/* Styling Modal Keranjang */
+/* Keranjang */
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #00b035;     
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
 .cart-modal-card {
     max-width: 500px;
     padding: 20px;
@@ -442,8 +466,8 @@ select {
 }
 
 .btn-remove-item {
-    background-color: #450a0a;
-    color: #fca5a5;
+    background-color: #b30000;
+    color: #ffffff;
     border: 1px solid #7f1d1d;
     padding: 6px 10px;
     border-radius: 6px;
@@ -453,7 +477,7 @@ select {
 }
 
 .btn-remove-item:hover {
-    background-color: #7f1d1d;
+    background-color: #fa0101;
 }
 
 .cart-modal-footer {
