@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // --- 1. AUTH GUARD & USERNAV ---
+    // 1. AUTH & USERNAV
     const userName = localStorage.getItem("user_name");
     
     // Jika belum login, redirect paksa ke login.html
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inisialisasi Badge Keranjang
     updateCartBadge();
 
-    // --- 2. FETCH DATA DARI API ---
+    // 2. FETCH DATA DARI API
     async function fetchProducts() {
         showLoading(true);
         try {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 3. RENDER KATEGORI DINAMIS ---
+    // 3. RENDER KATEGORI DINAMIS
     function populateCategories(products) {
         // Ambil kategori unik menggunakan FP / Set
         const categories = [...new Set(products.map(p => p.category))];
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. RENDER DOKUMEN / CARD GRID ---
+    // 4. CARD GRID
     function renderProducts(isLoadMore = false) {
         if (!isLoadMore) {
             productGrid.innerHTML = "";
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 5. FILTER & SORTING (FUNCTIONAL PROGRAMMING) ---
+    // 5. FILTER & SORTING 
     function applyFiltersAndSort() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         const selectedCategory = categoryFilter.value;
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProducts(false);
     }
 
-    // --- 6. DEBOUNCE SEARCH (CLOSURES) ---
+    // 6. DEBOUNCE SEARCH (CLOSURES)
     function debounce(func, delay = 400) {
         let timeoutId;
         return function (...args) {
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sortFilter.addEventListener("change", applyFiltersAndSort);
     btnLoadMore.addEventListener("click", () => renderProducts(true));
 
-    // --- 7. EVENT DELEGATION UNTUK KARTU & MODAL ---
+    // 7. EVENT DELEGATION UNTUK KARTU & MODAL
     productGrid.addEventListener("click", (event) => {
         const target = event.target;
 
@@ -200,7 +200,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 8. KERANJANG BELANJA (LOCALSTORAGE CRUD) ---
+    // 8. KERANJANG BELANJA 
+    function showToast(message, duration = 2500) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.remove("hidden");
+      toast.classList.add("show");
+      
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+      toast.classList.remove("show");
+      }, duration);
+    }
+    
     function addToCart(productId) {
         const product = allProducts.find(p => p.id === productId);
         if (!product) return;
@@ -214,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         localStorage.setItem("cart_items", JSON.stringify(cart));
         updateCartBadge();
-        alert(`"${product.title}" berhasil ditambahkan ke keranjang!`);
+        showToast(`"${product.title}" berhasil ditambahkan ke keranjang!`);
     }
 
     function updateCartBadge() {
@@ -222,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartBadge.textContent = totalItems;
     }
 
-    // Event Buka & Tutup Modal Keranjang
+    // Buka & Tutup Modal Keranjang
     btnCart.addEventListener("click", () => {
         renderCartItems();
         cartModal.style.display = "flex";
@@ -282,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCartItems();
     }
 
-    // --- 9. MODAL DETAIL PRODUK ---
+    // 9. MODAL DETAIL PRODUK 
     function openModal(productId) {
         const product = allProducts.find(p => p.id === productId);
         if (!product) return;
