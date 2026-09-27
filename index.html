@@ -34,7 +34,6 @@
             <div class="filter-group">
                 <select id="category-filter">
                     <option value="">Semua Kategori</option>
-                    <!-- Kategori akan diisi secara dinamis dari JS -->
                 </select>
 
                 <select id="sort-filter">
@@ -49,10 +48,10 @@
             </div>
         </section>
 
-        <!-- Global Error State -->
+        <!-- Error -->
         <div id="global-error" class="alert-error" style="display: none;"></div>
 
-        <!-- Global Loading State -->
+        <!-- Loading -->
         <div id="global-loading" class="loading-spinner-box" style="display: none;">
             <div class="spinner"></div>
             <p>Memuat produk...</p>
@@ -69,7 +68,7 @@
         </div>
     </main>
 
-    <!-- Modal Detail Produk -->
+    <!-- Detail Produk -->
     <div id="product-modal" class="modal-overlay" style="display: none;">
         <div class="modal-card">
             <button id="modal-close" class="modal-close">&times;</button>
@@ -79,7 +78,7 @@
         </div>
     </div>
 
-    <!-- Modal Keranjang Belanja -->
+    <!-- Keranjang Belanja -->
     <div id="cart-modal" class="modal-overlay" style="display: none;">
         <div class="modal-card cart-modal-card">
             <button id="cart-modal-close" class="modal-close">&times;</button>
@@ -87,7 +86,6 @@
                 <h3>🛒 Keranjang Belanja</h3>
             </div>
             <div id="cart-items-container" class="cart-items-container">
-                <!-- Daftar item keranjang akan di-render di sini -->
             </div>
             <div class="cart-modal-footer">
                 <div class="cart-total">
@@ -97,5 +95,6 @@
             </div>
         </div>
     </div>
+    <div id="toast" class="toast hidden"></div>
 </body>
 </html>
