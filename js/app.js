@@ -52,23 +52,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. FETCH DATA DARI API
     async function fetchProducts() {
-        showLoading(true);
-        try {
-            const response = await fetch("https://dummyjson.com/products?limit=100");
-            if (!response.ok) throw new Error("Gagal mengambil data produk.");
-            
-            const data = await response.json();
-            allProducts = data.products;
-            filteredProducts = [...allProducts];
+    showLoading(true);
+    try {
+        let fetchedProducts = [];
+        let skip = 0;
+        let total = Infinity;
 
-            populateCategories(allProducts);
-            applyFiltersAndSort();
-        } catch (error) {
-            showError("Terjadi kesalahan saat memuat katalog: " + error.message);
-        } finally {
-            showLoading(false);
+        while (fetchedProducts.length < total) {
+            const response = await fetch(`https://dummyjson.com/products?limit=30&skip=${skip}`);
+            if (!response.ok) throw new Error("Gagal mengambil data produk.");
+
+            const data = await response.json();
+            fetchedProducts = fetchedProducts.concat(data.products);
+            total = data.total;
+            skip += data.products.length;
+
+            if (data.products.length === 0) break;
         }
+
+        allProducts = fetchedProducts;
+        filteredProducts = [...allProducts];
+
+        populateCategories(allProducts);
+        applyFiltersAndSort();
+    } catch (error) {
+        showError("Terjadi kesalahan saat memuat katalog: " + error.message);
+    } finally {
+        showLoading(false);
     }
+}
 
     // 3. RENDER KATEGORI DINAMIS
     function populateCategories(products) {
